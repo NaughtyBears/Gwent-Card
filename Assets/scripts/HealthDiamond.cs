@@ -13,19 +13,17 @@ public class HealthDiamond : MonoBehaviour {
     }
     
     /// <summary>
-    /// Setting visibility for health image
+    /// 设置生命宝石 sprite的可见性
     /// </summary>
-    /// <param name="visibility">true if want to see image, false otherwise</param>
+    /// <param name="visibility">true 显示生命宝石， false 不显示生命宝石</param>
     public void setVisibility(bool visibility)
     {
         this.spriteRenderer.gameObject.SetActive(visibility);
     }
 
     /// <summary>
-    /// Moving health image to pointed position
+    /// 将生命宝石移动到指定位置
     /// </summary>
-    /// <param name="x">x coordinate of pointed position</param>
-    /// <param name="y">y coordinate of pointed position</param>
     public void moveTo(float x, float y)
     {
         Vector3 vector = new Vector3(x, y, 0);
@@ -33,7 +31,7 @@ public class HealthDiamond : MonoBehaviour {
     }
 
     /// <summary>
-    /// Enabling sprite to model
+    /// 设置spriteRenderer
     /// </summary>
     public void enableSprite()
     {
@@ -41,18 +39,18 @@ public class HealthDiamond : MonoBehaviour {
     }
 
     /// <summary>
-    /// Getting position of health diamond image
+    /// 获得生命宝石的位置
     /// </summary>
-    /// <returns>position of health diamond image</returns>
+    /// <returns>生命宝石的位置</returns>
     public Vector3 getPosition()
     {
         return this.transform.position;
     }
 
     /// <summary>
-    /// Setting position of health diamond image
+    /// 设置生命宝石的位置
     /// </summary>
-    /// <param name="vector"></param>
+    /// <param name="vector">生命宝石的位置</param>
     public void setPosition(Vector3 vector)
     {
         this.transform.position = vector;

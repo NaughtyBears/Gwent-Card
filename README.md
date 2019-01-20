@@ -4,34 +4,36 @@ game written in C# stylized and modeled on the Gwent game.
 <div style="text-align:center"><img src="../master/Assets/Images/screen.PNG"></div>
 
 
-## Getting Started
+## Bug
+Bug: 
+① 无法间谍牌并未受到天气牌的影响！解决！！
+② 第二回发牌,如果当前玩家手牌为空进入次回合，会出现Big Bug  解决！！
+③ 多重天气牌效果影响的梳理   解决！！ UI问题，显示叠加
+④ 当手牌为0和10的时候触发BUG直接交换了双方手牌位置具体请自行实现 
+⑤ 灼烧应该烧下去对方战场上最大的且点数相同的全部卡片且如果场上没有最大点数的牌，会报错越界异常	解决！！
+⑥ 天气牌影响后通过稻草人撤回被影响的牌后，此牌再次打 weatherEffect依旧为true	解决！！
+⑦ 假如一方手牌打完后，次回合另一方开局点击的第一张牌会被当做已被选中的牌，点击其他牌的时候就会被浮动下去 
+⑧ 一定情况下，会出现手牌为互换的情况
+⑨ 烧灼使用后，应该直接去往墓地，而不是停留在特殊卡牌框组中 解决！！
+⑩ 晴天使用后，应该直接去往自加墓地，而不是通过sendCardToDeathList函数是它位置去往对方墓地，而当前使用晴天的玩家的deathList中包含晴天牌 解决！！
+⑾ player2墓地卡牌初始位置	解决！！
+⑾ 烧灼之后未更新位置		解决！！
+⑾ 单独烧灼的时候卡牌的位置(细节)  
+⑾ 如下问题:
+8.63 4.48 -0.16
+8.59 4.52 -0.14
+8.55 4.56 -0.12
+8.51 4.52 -0.09999999
+y轴出现问题
+⑾ 双方墓地在次回合交换位置时发生位置上了颠倒 解决！！
+⑾ 有时会出现一种BUG，平局，游戏结束之后，游戏没有退出依然处于出牌阶段
+ 
+⑾ 一切围绕墓地问题开展，首先是由这个moveCardsFromDeskToDeathArea函数，进行了回合时的墓地清洗(理清楚情况)，然后就是每次交换玩家出牌时，函数changeDeathPos 解决！！
+理解：
+moveCardsFromDeskToDeathArea函数，用于玩家在次回合的卡牌清理至墓地，此时应该判断哈上方玩家的y坐标不应该是下方玩家的y坐标的负值！
+changeDeathPos函数用于每次玩家交换位置时的坐标替换，同理上方玩家的y坐标不应该是下方玩家的y坐标的负值！
+下方：8.51f, -4.57f, -0.1f，y轴的绝对值的值逐渐变小
+上方：8.51f, 4.57f, -0.1f，y轴的绝对值的值逐渐变大
+⑾玩家二场地场地上为空时，次回合会出现越界问题 解决！！
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-In puropse of cloning repository use below command
-
-```
-git clone https://github.com/wookieJ/gwent-card-game.git
-```
-
-### Installing
-
-To install and run application you need Unity.
-In purpose of producing executable file in Unity choose "File -> Build settings..."
-
-<div style="text-align:center"><img src="../master/Assets/Images/build.PNG"></div>
-
-Choose "build" for executable file producing or "build and run" for also running it after building.
-
-### TODO
-
-* Retreving dead cards
-* Implementing some special cards effects
-* Adding animations and sound effects
-* Improving graphics
-
-## Built With
-
-* [Unity](https://unity3d.com/) - Cross-platform game engine developed by Unity Technologies.

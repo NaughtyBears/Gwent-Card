@@ -1046,7 +1046,16 @@ public class Game : MonoBehaviour
         // 上下翻转卡牌
         player1.getDeck().flipGroupCards();
         player2.getDeck().flipGroupCards();
-        player1.getDeck().changeDeathPos(player2.getDeck().cardsInDeaths); //函数测试中
+        //player1.getDeck().changeDeathPos(player2.getDeck().cardsInDeaths); //函数测试中
+
+        if(activePlayerNumber == (int)PlayerNumber.PLAYER1)
+        {
+            Deck.changeDeathPos(player1.getDeck().cardsInDeaths, player2.getDeck().cardsInDeaths);
+        }
+        else
+        {
+            Deck.changeDeathPos(player2.getDeck().cardsInDeaths, player1.getDeck().cardsInDeaths);
+        }
 
         // 比分位置交换
         Vector3 tempVector = score1Text.transform.position;

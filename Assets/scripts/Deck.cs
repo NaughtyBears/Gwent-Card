@@ -695,6 +695,68 @@ public class Deck : MonoBehaviour
         }
     }
 
+    public static void changeDeathPos(List<Card> cardsInDeath1, List<Card> cardsInDeath2)
+    {
+        int count = (cardsInDeath2.Count < cardsInDeath1.Count) ? cardsInDeath1.Count : cardsInDeath2.Count;
+        for (int i = 0; i <= count - 1; i++)
+        {
+            if (i <= cardsInDeath2.Count - 1 && i <= cardsInDeath1.Count - 1)
+            {
+                Vector3 tempVector = cardsInDeath1[i].transform.position;
+                cardsInDeath1[i].transform.position = cardsInDeath2[i].transform.position;
+                cardsInDeath2[i].transform.position = tempVector;
+            }
+
+            //player1墓地牌更多且player2以及调换完成
+            if (count == cardsInDeath1.Count && i > cardsInDeath2.Count - 1)
+            {
+                if (cardsInDeath2.Count != 0)
+                {
+                    Vector3 tempVector = cardsInDeath1[i - 1].transform.position;
+                    tempVector.x += 0.04f;
+                    tempVector.y += 0.04f;
+                    tempVector.z -= 0.02f;
+                    cardsInDeath1[i].transform.position = tempVector;
+                }
+                else
+                {
+                    Vector3 player1DeathAreaVector = new Vector3(8.51f, -4.57f, -0.1f);
+
+                    float x = player1DeathAreaVector.x + i / 25.0f;
+                    float y = player1DeathAreaVector.y + i / 25.0f;
+                    float z = player1DeathAreaVector.z - i / 50.0f;
+
+                    cardsInDeath1[i].transform.position = new Vector3(x, y, z);
+                }
+
+
+            }
+            else if (count == cardsInDeath2.Count && i > cardsInDeath1.Count - 1)
+            {
+                if (cardsInDeath1.Count != 0)
+                {
+                    Vector3 tempVector = cardsInDeath2[i - 1].transform.position;
+                    tempVector.x += 0.04f;
+                    tempVector.y += 0.04f;
+                    tempVector.z -= 0.02f;
+                    cardsInDeath2[i].transform.position = tempVector;
+                }
+                else
+                {
+                    Vector3 player2DeathAreaVector = new Vector3(8.51f, 4.57f, -0.1f);
+
+                    float x = player2DeathAreaVector.x + i / 25.0f;
+                    float y = player2DeathAreaVector.y + i / 25.0f;
+                    float z = player2DeathAreaVector.z - i / 50.0f;
+
+                    cardsInDeath2[i].transform.position = new Vector3(x, y, z);
+                }
+
+            }
+
+        }
+    }
+
     public void changeDeathPos(List<Card> cardsInDeath)
     {
         int count = (cardsInDeath.Count < this.cardsInDeaths.Count) ? this.cardsInDeaths.Count : cardsInDeath.Count;
@@ -710,19 +772,48 @@ public class Deck : MonoBehaviour
             //player1墓地牌更多且player2以及调换完成
             if(count == this.cardsInDeaths.Count && i > cardsInDeath.Count - 1)
             {
-                Vector3 tempVector = this.cardsInDeaths[i - 1].transform.position;
-                tempVector.x += 0.04f;
-                tempVector.y += 0.04f;
-                tempVector.z -= 0.02f;
-                this.cardsInDeaths[i].transform.position = tempVector;
+                if (cardsInDeath.Count != 0)
+                {
+                    Vector3 tempVector = this.cardsInDeaths[i - 1].transform.position;
+                    tempVector.x += 0.04f;
+                    tempVector.y += 0.04f;
+                    tempVector.z -= 0.02f;
+                    this.cardsInDeaths[i].transform.position = tempVector;
+                }
+                else
+                {
+                    Vector3 player2DeathAreaVector = new Vector3(8.51f, 4.57f, -0.1f);
+
+                    float x = player2DeathAreaVector.x + count / 25.0f;
+                    float y = player2DeathAreaVector.y + count / 25.0f;
+                    float z = player2DeathAreaVector.z - count / 50.0f;
+
+                    this.cardsInDeaths[i].transform.position = new Vector3(x, y, z);
+                }
+
+                
             }
             else if(count == cardsInDeath.Count && i > this.cardsInDeaths.Count - 1)
             {
-                Vector3 tempVector = cardsInDeath[i - 1].transform.position;
-                tempVector.x += 0.04f;
-                tempVector.y += 0.04f;
-                tempVector.z -= 0.02f;
-                cardsInDeath[i].transform.position = tempVector;
+                if(this.cardsInDeaths.Count != 0)
+                {
+                    Vector3 tempVector = cardsInDeath[i - 1].transform.position;
+                    tempVector.x += 0.04f;
+                    tempVector.y += 0.04f;
+                    tempVector.z -= 0.02f;
+                    cardsInDeath[i].transform.position = tempVector;
+                }
+                else
+                {
+                    Vector3 player1DeathAreaVector = new Vector3(8.51f, -4.57f, -0.1f);
+
+                    float x = player1DeathAreaVector.x + count / 25.0f;
+                    float y = player1DeathAreaVector.y + count / 25.0f;
+                    float z = player1DeathAreaVector.z - count / 50.0f;
+
+                   cardsInDeath[i].transform.position = new Vector3(x, y, z);
+                }
+
             }
 
         }
